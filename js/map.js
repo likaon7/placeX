@@ -897,7 +897,7 @@ async function fetchStatsJSONs(urls) {
 async function fetchJSON(url) {
 	console.log(url)
 	try{
-		const response = await fetch(url);
+		const response = await fetch('https://5.180.181.48/' + url);
 		await timeout(1); //simple request throttling
 		return await response.json();
 	}catch(e){
