@@ -239,14 +239,13 @@ STATISTICS
 
 	},
 	showStatsButtonAction: function() {
-
-		
+		return
+		//TODO work in progress
 		placeX.getStats().then(function(stats) {
 			if(false == stats)
 				return false
 			//TODO format and print stats
 			$('#results').html(stats)
-			
 			
 		})
 	},
