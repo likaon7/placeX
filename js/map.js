@@ -871,7 +871,7 @@ async function fetchJSONs(urls) {
 	var jsons, json
 	urls = [...new Set(urls)]
 	for (url in urls) {
-		if(url instanceof Function) continue
+		if("max" == url || "min" == url) continue
 		json = await fetchJSON(urls[url])
 		jsons = { ...jsons, ...json }
 	}
@@ -883,6 +883,7 @@ async function fetchStatsJSONs(urls) {
 	var jsons = [], json
 	urls = [...new Set(urls)]
 	for (url in urls) {
+		if("max" == url || "min" == url) continue
 		json = await fetchJSON(urls[url])
 		//TODO merge...
 		jsons.push(json)
