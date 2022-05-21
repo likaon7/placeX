@@ -58,7 +58,7 @@ var placeX = {
 	init: function() {
 		this.map = L.map(placeX.config.mapElementID, {
 			crs: L.CRS.Simple,
-			minZoom: -2,
+			minZoom: -3,
 			zoomSnap: 0.2,
 			renderer: L.canvas({ padding: 2 })
 		})
