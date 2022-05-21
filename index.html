@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>placeX - r/place tool</title>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="shortcut icon" type="image/x-icon"
+	href="docs/images/favicon.ico" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link
+	href="https://unpkg.com/leaflet-easybutton@2.0.0/src/easy-button.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"
+	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+	crossorigin="anonymous" referrerpolicy="no-referrer">
+<link href="css/nouislider.min.css" rel="stylesheet">
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"
+	integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script src="js/CanvasFlowmapLayer.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.min.js"></script>
+<script src="js/coord-projection.js"></script>
+
+<style>
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+.leaflet-container {
+	height: 700px;
+	width: 1000px;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.leaflet-pane {
+	image-rendering: pixelated;
+}
+
+.row {
+	margin: 0.5em;
+	background: white;
+	position: relative;
+}
+
+.col {
+	background: white;
+}
+
+#timeslider {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+.leaflet-container .leaflet-control-coord-projection {
+	background-color: rgba(255, 255, 255, 0.7);
+	box-shadow: 0 0 5px #bbb;
+	padding: 0 5px;
+	margin: 0;
+	color: #333;
+	font: 11px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+#map {
+	cursor: crosshair;
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+
+.noUi-handle.noUi-handle-lower {
+	background: red;
+}
+
+.noUi-handle.noUi-handle-upper {
+	background: green;
+}
+#tools{
+	overflow: auto;
+}
+</style>
+
+
+</head>
+<body>
+	<div class="" style="z-index: 1001; width: 100%;">
+		<div class="row" id="tools-wrapper">
+			<div class="col col-lg-9">
+				<div id="map"></div>
+			</div>
+			<div class="col col-lg-3">
+				<div class="row" id="tools">
+						<div class="card">
+							<div class="card-header" id="headingOne">
+								<h2 class="mb-0">
+									<button class="btn btn-link" data-toggle="collapse"
+										data-target="#collapseOne" aria-expanded="true"
+										aria-controls="collapseOne">Tools</button>
+								</h2>
+							</div>
+
+							<div id="collapseOne" class="collapse"
+								aria-labelledby="headingOne" data-parent="#tools">
+								<div class="card-body">
+									<div id="mode-buttons" class="btn-group row"
+										style="z-index: 1001">
+										<button type="buttons" id="allies"
+											class="btn btn-success btn-block">Allies</button>
+										<button type="buttons" id="raiders"
+											class="btn btn-danger btn-block">Raiders</button>
+										<button type="buttons" id="contributors"
+											class="btn btn-primary btn-block">Mutual Core</button>
+										<!--<button type="buttons" id="findMyHash"
+											class="btn btn-primary btn-block">My user_hash</button>-->
+										<button type="buttons" id="stats"
+											class="btn btn-primary btn-block">Place statistics</button>
+										<button type="buttons" id=clearAll
+											class="btn btn-dark btn-block">Clear map</button>
+									</div>
+								</div>
+							
+							
+								<div class="row">
+									<h3>Actions</h3>
+									<div class="row">
+										<div id="action-buttons" class="btn-group"></div>
+									</div>
+									<div class="row" id="results"></div>
+								</div>
+								<div class="row">
+									<h4>Help:</h4>
+								</div>
+								<div class="row">
+									<div id="help">
+										<div class="card">
+											<div class="card-header" id="headingTwo">
+												<h5 class="mb-0">
+													<button class="btn btn-link collapsed" data-toggle="collapse"
+														data-target="#a-r" aria-expanded="false"
+														aria-controls="a-r">Allies & Raiders</button>
+												</h5>
+											</div>
+											<div id="a-r" class="collapse"
+												aria-labelledby="headingTwo" data-parent="#help">
+												<div class="card-body">
+													Shows every single pixel placed by Allie/Raider (in given time span - see slider!)
+													Definitions:<br> 
+													<strong>Allie</strong> - a user that placed at least 3
+													valid pixels in selected single place/square in given time span
+													<br> 
+													<strong>Raider</strong> - a user that placed at least 3 invalid pixels
+													in selected single place/square in given time span <br>
+													<strong>Valid pixel</strong> is a pixel with same colour as pixel on template image (which is
+													sourced from <strong>finalclean</strong> project)
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header" id="headingTwo">
+												<h5 class="mb-0">
+													<button class="btn btn-link collapsed" data-toggle="collapse"
+														data-target="#mutualcore" aria-expanded="false"
+														aria-controls="mutualcore">Mutual Core</button>
+												</h5>
+											</div>
+											<div id="mutualcore" class="collapse"
+												aria-labelledby="headingTwo" data-parent="#help">
+												<div class="card-body">Shows places/squares of activity of users that were active in
+													selected place/square (in given time span)</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h5 class="mb-0">
+													<button class="btn btn-link collapsed" data-toggle="collapse"
+														data-target="#collapseThree" aria-expanded="false"
+														aria-controls="collapseThree">About</button>
+												</h5>
+											</div>
+											<div id="collapseThree" class="collapse"
+												aria-labelledby="headingThree" data-parent="#help">
+												<div class="card-body">
+													Choose a tool -> pick some squares -> click action button -> explore!
+													<br>
+													Before clearing the map you can change a tool to overlay visialisations
+													<br>
+													Data is pregenerated to reduce server load (for allies/raiders 500TB of data was processed)
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="row">
+					Made by likaon7 ( discord: likaon#4308 )
+					<br><br>
+					* may be slow in Chrome
+				</div>
+				
+
+			</div>
+		</div>
+		<div id="timeslider" class="row">
+			<div id="slider-date" style="width: 95%;" class="row"></div>
+			<div class="row">
+				Show data for dates: &nbsp;
+				<strong>From:</strong>
+				<div id="time-start" class="row"></div>
+				<strong>To:</strong>
+				<div id="time-end" class="row"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script>
+		
+	</script>
+
+
+	<script src="js/map.js" crossorigin=""></script>
+	<script>
+$(document).ready(function(){
+	$("#tools").css('max-height', $(window).height() - $("#timeslider").height() - 120)
+})
+		
+</script>
+</body>
+</html>
