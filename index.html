@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-<title>rplace stats</title>
+<title>placeX - r/place tool</title>
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -135,8 +135,8 @@ html, body {
 											class="btn btn-danger btn-block">Raiders</button>
 										<button type="buttons" id="contributors"
 											class="btn btn-primary btn-block">Mutual Core</button>
-										<button type="buttons" id="findMyHash"
-											class="btn btn-primary btn-block">My user_hash</button>
+										<!--<button type="buttons" id="findMyHash"
+											class="btn btn-primary btn-block">My user_hash</button>-->
 										<button type="buttons" id="stats"
 											class="btn btn-primary btn-block">Place statistics</button>
 										<button type="buttons" id=clearAll
@@ -166,15 +166,15 @@ html, body {
 											<div id="a-r" class="collapse"
 												aria-labelledby="headingTwo" data-parent="#help">
 												<div class="card-body">
-													Shows every single pixel placed by Allie/Raider outside of
-													selected single place/square in given time span (slider!)
-													Definitions:<br> Allie - a user that placed at least 3
+													Shows every single pixel placed by Allie/Raider (in given time span - see slider!)
+													Definitions:<br> 
+													<strong>Allie</strong> - a user that placed at least 3
 													valid pixels in selected single place/square in given time span
-													<br> Raider - a user that placed at least 2 invalid pixels
+													<br> 
+													<strong>Raider</strong> - a user that placed at least 3 invalid pixels
 													in selected single place/square in given time span <br>
-													Validity of pixels is determined by comparing pixel color
-													placed with pixel color as visible on template image (which is
-													sourced from r/finalclean)
+													<strong>Valid pixel</strong> is a pixel with same colour as pixel on template image (which is
+													sourced from <strong>finalclean</strong> project)
 												</div>
 											</div>
 										</div>
@@ -188,35 +188,11 @@ html, body {
 											</div>
 											<div id="mutualcore" class="collapse"
 												aria-labelledby="headingTwo" data-parent="#help">
-												<div class="card-body">Shows places/squares placed by
-													every single user that was active in selected place/square in
-													given time span</div>
+												<div class="card-body">Shows places/squares of activity of users that were active in
+													selected place/square (in given time span)</div>
 											</div>
 										</div>
-										<div class="card">
-											<div class="card-header" id="headingThree">
-												<h5 class="mb-0">
-													<button class="btn btn-link collapsed" data-toggle="collapse"
-														data-target="#collapseThree" aria-expanded="false"
-														aria-controls="collapseThree">Collapsible Group Item
-														#3</button>
-												</h5>
-											</div>
-											<div id="collapseThree" class="collapse"
-												aria-labelledby="headingThree" data-parent="#help">
-												<div class="card-body">Anim pariatur cliche reprehenderit,
-													enim eiusmod high life accusamus terry richardson ad squid. 3
-													wolf moon officia aute, non cupidatat skateboard dolor brunch.
-													Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-													tempor, sunt aliqua put a bird on it squid single-origin coffee
-													nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-													craft beer labore wes anderson cred nesciunt sapiente ea
-													proident. Ad vegan excepteur butcher vice lomo. Leggings
-													occaecat craft beer farm-to-table, raw denim aesthetic synth
-													nesciunt you probably haven't heard of them accusamus labore
-													sustainable VHS.</div>
-											</div>
-										</div>
+										
 									</div>
 								</div>
 							</div>
