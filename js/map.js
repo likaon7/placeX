@@ -1,4 +1,4 @@
-var baseURL = 'https://5.180.181.48/'
+var baseURL = 'https://5.180.181.48/' //fileserver with pregenerated data (change to yours)
 
 Number.prototype.map = function(in_min, in_max, out_min, out_max) {
 	return (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
