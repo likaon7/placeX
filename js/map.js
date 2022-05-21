@@ -1,3 +1,5 @@
+var baseURL = 'http://5.180.181.48/'
+
 Number.prototype.map = function(in_min, in_max, out_min, out_max) {
 	return (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
@@ -890,7 +892,7 @@ async function fetchStatsJSONs(urls) {
 async function fetchJSON(url) {
 	console.log(url)
 	try{
-		const response = await fetch(url);
+		const response = await fetch(baseURL + url);
 		await timeout(1); //simple request throttling
 		return await response.json();
 	}catch(e){
