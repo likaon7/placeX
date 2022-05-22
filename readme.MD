@@ -1,5 +1,5 @@
 tools to explore r/place
 
-uses pregenerated data
+based on official r/place dataset
 
 discord: likaon#4308
